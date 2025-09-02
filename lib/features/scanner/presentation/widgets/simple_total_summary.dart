@@ -77,12 +77,29 @@ class SimpleTotalSummary extends StatelessWidget {
                       ),
                     ],
                   ),
-                  if (itemCount > 0)
+                  if (itemCount > 0) ...[
+                    if (onExport != null && !isExporting)
+                      IconButton(
+                        onPressed: onExport,
+                        icon: const Icon(Icons.download_rounded, color: Colors.white),
+                        tooltip: 'Exportar CSV',
+                      ),
+                    if (isExporting)
+                      Container(
+                        width: 20,
+                        height: 20,
+                        margin: const EdgeInsets.symmetric(horizontal: 12),
+                        child: const CircularProgressIndicator(
+                          strokeWidth: 2,
+                          valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
+                        ),
+                      ),
                     IconButton(
                       onPressed: onClear,
                       icon: const Icon(Icons.clear_all, color: Colors.white),
                       tooltip: 'Limpar tudo',
                     ),
+                  ],
                 ],
               ),
               const SizedBox(height: 12),
