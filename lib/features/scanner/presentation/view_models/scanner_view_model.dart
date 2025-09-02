@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 
 import '../../../../services/audio_service.dart';
+import '../../../../services/csv_export_service.dart';
 import '../../data/repositories/barcode_repository.dart';
 import '../../domain/models/barcode_item.dart';
 import '../../domain/services/barcode_validation_service.dart';
@@ -15,6 +16,7 @@ class ScannerViewModel extends ChangeNotifier {
 
   List<BarcodeItem> _items = [];
   bool _isProcessing = false;
+  bool _isExporting = false;
   String? _lastError;
   String _currentInput = '';
   Timer? _usbInputTimer;
@@ -24,6 +26,8 @@ class ScannerViewModel extends ChangeNotifier {
 
   bool get isProcessing => _isProcessing;
 
+  bool get isExporting => _isExporting;
+
   String? get lastError => _lastError;
 
   double get totalValue => _repository.totalValue;
@@ -31,6 +35,8 @@ class ScannerViewModel extends ChangeNotifier {
   int get itemCount => _repository.itemCount;
 
   bool get hasItems => _items.isNotEmpty;
+
+  bool get canExport => _items.isNotEmpty && !_isExporting;
 
   ScannerViewModel({
     required BarcodeRepository repository,
