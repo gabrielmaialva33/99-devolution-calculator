@@ -1,5 +1,4 @@
 import 'package:permission_handler/permission_handler.dart';
-import 'dart:io';
 
 class PermissionService {
   static final PermissionService _instance = PermissionService._internal();

@@ -310,9 +310,13 @@ class _SimpleScannerViewState extends State<SimpleScannerView> {
     final permissionService = PermissionService();
     final hasPermission = await permissionService.isPermissionGranted(Permission.camera);
     
-    if (!hasPermission && context.mounted) {
+    if (!hasPermission) {
+      if (!context.mounted) return;
+      
       final status = await permissionService.requestPermission(Permission.camera);
       if (!status.isGranted) {
+        if (!context.mounted) return;
+        
         // Mostra mensagem de erro se permissão negada
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(
@@ -324,19 +328,19 @@ class _SimpleScannerViewState extends State<SimpleScannerView> {
       }
     }
     
-    if (context.mounted) {
-      Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (context) => CameraScannerScreen(
-            onScan: (code) {
-              viewModel.processBarcode(code, ScanMethod.camera);
-              Navigator.pop(context);
-            },
-          ),
+    if (!context.mounted) return;
+    
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => CameraScannerScreen(
+          onScan: (code) {
+            viewModel.processBarcode(code, ScanMethod.camera);
+            Navigator.pop(context);
+          },
         ),
-      );
-    }
+      ),
+    );
   }
 
   void _openManualInput(BuildContext context, ScannerViewModel viewModel) {

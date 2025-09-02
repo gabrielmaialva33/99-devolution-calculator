@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 
 import '../../../../core/theme/app_colors.dart';
-import '../../../../services/permission_service.dart';
-import '../widgets/permission_dialog.dart';
 import 'simple_scanner_view.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -15,7 +13,6 @@ class SplashScreen extends StatefulWidget {
 class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderStateMixin, WidgetsBindingObserver {
   late AnimationController _animationController;
   late Animation<double> _fadeAnimation;
-  final PermissionService _permissionService = PermissionService();
   bool _hasInitialized = false;
   
   @override
@@ -42,11 +39,6 @@ class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderSt
     _initializeApp();
   }
 
-  @override
-  void didChangeAppLifecycleState(AppLifecycleState state) {
-    super.didChangeAppLifecycleState(state);
-    // Removido - não precisamos mais verificar permissões aqui
-  }
 
   Future<void> _initializeApp() async {
     // Aguarda um tempo mínimo para mostrar a splash screen
@@ -59,15 +51,6 @@ class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderSt
     }
   }
 
-  void _showPermissionDialog() {
-    showDialog(
-      context: context,
-      barrierDismissible: false,
-      builder: (context) => PermissionDialog(
-        onPermissionsGranted: _navigateToMainScreen,
-      ),
-    );
-  }
 
   void _navigateToMainScreen() {
     if (mounted && !_hasInitialized) {
