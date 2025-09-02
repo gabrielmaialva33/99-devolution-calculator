@@ -52,10 +52,6 @@ class _SimpleScannerViewState extends State<SimpleScannerView> {
                     totalValue: viewModel.totalValue,
                     itemCount: viewModel.itemCount,
                     onClear: viewModel.clearAll,
-                    onExport: viewModel.canExport
-                        ? () => _showExportDialog(context, viewModel)
-                        : null,
-                    isExporting: viewModel.isExporting,
                   ),
                 ),
 
@@ -164,69 +160,139 @@ class _SimpleScannerViewState extends State<SimpleScannerView> {
       child: Container(
         padding: const EdgeInsets.fromLTRB(16, 20, 16, 16),
         decoration: BoxDecoration(color: Colors.white),
-        child: Row(
+        child: Column(
           children: [
-            Expanded(
-              child: SizedBox(
-                height: 56,
-                child: ElevatedButton(
-                  onPressed: () => _openCameraScanner(context, viewModel),
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: AppColors.primary,
-                    foregroundColor: Colors.white,
-                    elevation: 0,
-                    shadowColor: Colors.transparent,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(16),
-                    ),
-                  ),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Icon(Icons.camera_alt_rounded, size: 24),
-                      const SizedBox(width: 8),
-                      Text(
-                        'Câmera',
-                        style: TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.w600,
+            // Primeira linha - Câmera e Manual
+            Row(
+              children: [
+                Expanded(
+                  child: SizedBox(
+                    height: 56,
+                    child: ElevatedButton(
+                      onPressed: () => _openCameraScanner(context, viewModel),
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: AppColors.primary,
+                        foregroundColor: Colors.white,
+                        elevation: 0,
+                        shadowColor: Colors.transparent,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(16),
                         ),
                       ),
-                    ],
-                  ),
-                ),
-              ),
-            ),
-            const SizedBox(width: 12),
-            Expanded(
-              child: SizedBox(
-                height: 56,
-                child: OutlinedButton(
-                  onPressed: () => _openManualInput(context, viewModel),
-                  style: OutlinedButton.styleFrom(
-                    foregroundColor: AppColors.primary,
-                    side: BorderSide(color: AppColors.primary, width: 2),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(16),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Icon(Icons.camera_alt_rounded, size: 24),
+                          const SizedBox(width: 8),
+                          Text(
+                            'Câmera',
+                            style: TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
                   ),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Icon(Icons.keyboard_rounded, size: 24),
-                      const SizedBox(width: 8),
-                      Text(
-                        'Manual',
-                        style: TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.w600,
+                ),
+                const SizedBox(width: 12),
+                Expanded(
+                  child: SizedBox(
+                    height: 56,
+                    child: OutlinedButton(
+                      onPressed: () => _openManualInput(context, viewModel),
+                      style: OutlinedButton.styleFrom(
+                        foregroundColor: AppColors.primary,
+                        side: BorderSide(color: AppColors.primary, width: 2),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(16),
                         ),
                       ),
-                    ],
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Icon(Icons.keyboard_rounded, size: 24),
+                          const SizedBox(width: 8),
+                          Text(
+                            'Manual',
+                            style: TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
                   ),
                 ),
-              ),
+              ],
             ),
+            // Segunda linha - Exportar (apenas quando há itens)
+            if (viewModel.hasItems) ...[
+              const SizedBox(height: 12),
+              SizedBox(
+                width: double.infinity,
+                height: 48,
+                child: viewModel.isExporting
+                    ? Container(
+                        decoration: BoxDecoration(
+                          color: AppColors.secondary.withValues(alpha: 0.1 * 255),
+                          borderRadius: BorderRadius.circular(16),
+                        ),
+                        child: const Center(
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              SizedBox(
+                                width: 20,
+                                height: 20,
+                                child: CircularProgressIndicator(
+                                  strokeWidth: 2,
+                                  color: AppColors.secondary,
+                                ),
+                              ),
+                              SizedBox(width: 12),
+                              Text(
+                                'Exportando...',
+                                style: TextStyle(
+                                  color: AppColors.secondary,
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.w500,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      )
+                    : OutlinedButton(
+                        onPressed: viewModel.canExport
+                            ? () => _showExportDialog(context, viewModel)
+                            : null,
+                        style: OutlinedButton.styleFrom(
+                          foregroundColor: AppColors.secondary,
+                          side: BorderSide(color: AppColors.secondary, width: 2),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(16),
+                          ),
+                        ),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Icon(Icons.download_rounded, size: 20),
+                            const SizedBox(width: 8),
+                            Text(
+                              'Exportar CSV',
+                              style: TextStyle(
+                                fontSize: 14,
+                                fontWeight: FontWeight.w600,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+              ),
+            ],
           ],
         ),
       ),
