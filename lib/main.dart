@@ -51,7 +51,7 @@ class DevolutionCalculatorApp extends StatelessWidget {
       child: MaterialApp(
         title: 'Devolution Calculator',
         debugShowCheckedModeBanner: false,
-        theme: AppTheme.darkTheme,
+        theme: AppTheme.lightTheme,
         home: const ScannerView(),
       ),
     );
