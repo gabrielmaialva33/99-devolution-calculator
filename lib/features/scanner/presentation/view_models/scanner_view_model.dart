@@ -59,7 +59,7 @@ class ScannerViewModel extends ChangeNotifier {
     try {
       await _repository.initialize();
     } catch (e) {
-      print('Erro ao inicializar repositório: $e');
+      // Continua sem persistência se houver erro de inicialização
     }
   }
 

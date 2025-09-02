@@ -29,7 +29,7 @@ class BarcodeRepository {
       _isInitialized = true;
     } catch (e) {
       // Em caso de erro, continua com lista vazia
-      print('Erro ao carregar dados do banco: $e');
+      // Em caso de erro ao carregar, continua com lista vazia
       _isInitialized = true;
     }
   }
@@ -45,7 +45,7 @@ class BarcodeRepository {
       _items.add(item);
       _notifyChanges();
     } catch (e) {
-      print('Erro ao adicionar item ao banco: $e');
+      // Em caso de erro ao salvar, continua com item na memória
       // Em caso de erro, ainda adiciona na memória para UX
       _items.add(item);
       _notifyChanges();
@@ -66,7 +66,7 @@ class BarcodeRepository {
         _items.removeAt(index);
         _notifyChanges();
       } catch (e) {
-        print('Erro ao remover item do banco: $e');
+        // Em caso de erro ao remover do banco, continua operação
         // Em caso de erro, ainda remove da memória para UX
         _items.removeAt(index);
         _notifyChanges();
@@ -85,7 +85,7 @@ class BarcodeRepository {
       _items.clear();
       _notifyChanges();
     } catch (e) {
-      print('Erro ao limpar dados do banco: $e');
+      // Em caso de erro ao limpar banco, continua operação
       // Em caso de erro, ainda limpa a memória para UX
       _items.clear();
       _notifyChanges();
