@@ -131,8 +131,9 @@ class SimpleTotalSummary extends StatelessWidget {
                 Text(
                   'Escaneie ou digite um código',
                   style: TextStyle(
-                    color: Colors.white.withValues(alpha: 0.8 * 255),
-                    fontSize: 14,
+                    color: Colors.white.withValues(alpha: 0.95 * 255),
+                    fontSize: 16,
+                    fontWeight: FontWeight.w500,
                   ),
                 ),
               ],
