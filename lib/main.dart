@@ -1,10 +1,35 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
 
-import 'screens/main_screen.dart';
+import 'core/theme/app_theme.dart';
+import 'features/scanner/data/repositories/barcode_repository.dart';
+import 'features/scanner/presentation/view_models/scanner_view_model.dart';
+import 'features/scanner/presentation/views/scanner_view.dart';
+import 'services/audio_service.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+  
+  // Set Brazilian locale
   Intl.defaultLocale = 'pt_BR';
+  
+  // Set system UI overlay style
+  SystemChrome.setSystemUIOverlayStyle(
+    const SystemUiOverlayStyle(
+      statusBarColor: Colors.transparent,
+      statusBarIconBrightness: Brightness.light,
+      systemNavigationBarColor: Colors.black,
+      systemNavigationBarIconBrightness: Brightness.light,
+    ),
+  );
+  
+  // Set preferred orientations
+  SystemChrome.setPreferredOrientations([
+    DeviceOrientation.portraitUp,
+    DeviceOrientation.portraitDown,
+  ]);
 
   runApp(const DevolutionCalculatorApp());
 }
@@ -14,37 +39,21 @@ class DevolutionCalculatorApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Calculadora de Devoluções',
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(
-          seedColor: Colors.blue,
-          brightness: Brightness.light,
-        ),
-        useMaterial3: true,
-        appBarTheme: AppBarTheme(
-          backgroundColor: Colors.blue[700],
-          foregroundColor: Colors.white,
-          elevation: 2,
-        ),
-        cardTheme: const CardThemeData(elevation: 4),
-        elevatedButtonTheme: ElevatedButtonThemeData(
-          style: ElevatedButton.styleFrom(
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(12),
-            ),
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(
+          create: (_) => ScannerViewModel(
+            repository: BarcodeRepository(),
+            audioService: AudioService(),
           ),
         ),
-        outlinedButtonTheme: OutlinedButtonThemeData(
-          style: OutlinedButton.styleFrom(
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(10),
-            ),
-          ),
-        ),
+      ],
+      child: MaterialApp(
+        title: 'Devolution Calculator',
+        debugShowCheckedModeBanner: false,
+        theme: AppTheme.darkTheme,
+        home: const ScannerView(),
       ),
-      home: const MainScreen(),
     );
   }
 }
