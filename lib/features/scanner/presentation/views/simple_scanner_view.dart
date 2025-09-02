@@ -167,7 +167,7 @@ class _SimpleScannerViewState extends State<SimpleScannerView> {
         child: Row(
           children: [
             Expanded(
-              child: Container(
+              child: SizedBox(
                 height: 56,
                 child: ElevatedButton(
                   onPressed: () => _openCameraScanner(context, viewModel),
@@ -199,7 +199,7 @@ class _SimpleScannerViewState extends State<SimpleScannerView> {
             ),
             const SizedBox(width: 12),
             Expanded(
-              child: Container(
+              child: SizedBox(
                 height: 56,
                 child: OutlinedButton(
                   onPressed: () => _openManualInput(context, viewModel),
