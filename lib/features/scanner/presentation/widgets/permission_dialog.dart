@@ -111,13 +111,6 @@ class _PermissionDialogState extends State<PermissionDialog> {
               'Para escanear códigos de barras',
               Colors.blue,
             ),
-            const SizedBox(height: 8),
-            _buildPermissionItem(
-              Icons.folder_rounded,
-              'Armazenamento',
-              'Para exportar arquivos CSV',
-              Colors.green,
-            ),
             
             // Resultado da última tentativa
             if (_lastResult != null) ...[

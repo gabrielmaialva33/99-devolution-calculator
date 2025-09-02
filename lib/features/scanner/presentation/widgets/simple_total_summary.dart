@@ -6,13 +6,11 @@ import '../../../../core/theme/app_colors.dart';
 class SimpleTotalSummary extends StatelessWidget {
   final double totalValue;
   final int itemCount;
-  final VoidCallback onClear;
 
   const SimpleTotalSummary({
     super.key,
     required this.totalValue,
     required this.itemCount,
-    required this.onClear,
   });
 
   @override
@@ -73,12 +71,6 @@ class SimpleTotalSummary extends StatelessWidget {
                       ),
                     ],
                   ),
-                  if (itemCount > 0)
-                    IconButton(
-                      onPressed: onClear,
-                      icon: const Icon(Icons.clear_all, color: Colors.white),
-                      tooltip: 'Limpar tudo',
-                    ),
                 ],
               ),
               const SizedBox(height: 12),

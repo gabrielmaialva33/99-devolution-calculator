@@ -9,10 +9,7 @@ class PermissionService {
   /// Lista de todas as permissões necessárias para o app
   List<Permission> get _requiredPermissions => [
     Permission.camera,
-    if (Platform.isAndroid) ...[
-      // Usa manageExternalStorage para Android moderno
-      Permission.manageExternalStorage,
-    ],
+    // Removido storage permissions para evitar problemas de loading infinito
   ];
 
   /// Verifica se todas as permissões estão concedidas

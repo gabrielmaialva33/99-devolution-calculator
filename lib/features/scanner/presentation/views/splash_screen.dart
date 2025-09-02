@@ -12,14 +12,18 @@ class SplashScreen extends StatefulWidget {
   State<SplashScreen> createState() => _SplashScreenState();
 }
 
-class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderStateMixin {
+class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderStateMixin, WidgetsBindingObserver {
   late AnimationController _animationController;
   late Animation<double> _fadeAnimation;
   final PermissionService _permissionService = PermissionService();
+  bool _hasInitialized = false;
   
   @override
   void initState() {
     super.initState();
+    
+    // Adiciona observer para detectar quando app volta do foreground
+    WidgetsBinding.instance.addObserver(this);
     
     _animationController = AnimationController(
       duration: const Duration(milliseconds: 1500),
@@ -38,6 +42,16 @@ class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderSt
     _initializeApp();
   }
 
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    super.didChangeAppLifecycleState(state);
+    
+    // Quando app volta do foreground (após conceder permissões), re-verifica
+    if (state == AppLifecycleState.resumed && !_hasInitialized) {
+      _checkPermissionsAndNavigate();
+    }
+  }
+
   Future<void> _initializeApp() async {
     // Aguarda um tempo mínimo para mostrar a splash screen
     await Future.delayed(const Duration(milliseconds: 2000));
@@ -48,12 +62,19 @@ class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderSt
   }
 
   Future<void> _checkPermissionsAndNavigate() async {
-    final hasPermissions = await _permissionService.areAllPermissionsGranted();
+    if (_hasInitialized) return;
     
-    if (hasPermissions) {
+    try {
+      final hasPermissions = await _permissionService.areAllPermissionsGranted();
+      
+      if (hasPermissions) {
+        _navigateToMainScreen();
+      } else {
+        _showPermissionDialog();
+      }
+    } catch (e) {
+      // Em caso de erro, navega para tela principal (graceful degradation)
       _navigateToMainScreen();
-    } else {
-      _showPermissionDialog();
     }
   }
 
@@ -68,7 +89,8 @@ class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderSt
   }
 
   void _navigateToMainScreen() {
-    if (mounted) {
+    if (mounted && !_hasInitialized) {
+      _hasInitialized = true;
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(
@@ -80,6 +102,7 @@ class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderSt
 
   @override
   void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
     _animationController.dispose();
     super.dispose();
   }
