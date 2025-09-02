@@ -1,4 +1,5 @@
 import 'dart:async';
+
 import '../../domain/models/barcode_item.dart';
 
 class BarcodeRepository {
@@ -6,9 +7,11 @@ class BarcodeRepository {
   final _itemsController = StreamController<List<BarcodeItem>>.broadcast();
 
   Stream<List<BarcodeItem>> get itemsStream => _itemsController.stream;
+
   List<BarcodeItem> get items => List.unmodifiable(_items);
 
   double get totalValue => _items.fold(0, (sum, item) => sum + item.value);
+
   int get itemCount => _items.length;
 
   void addItem(BarcodeItem item) {

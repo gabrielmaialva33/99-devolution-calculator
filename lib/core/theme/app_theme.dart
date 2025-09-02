@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+
 import 'app_colors.dart';
 
 class AppTheme {
@@ -7,7 +8,7 @@ class AppTheme {
     brightness: Brightness.dark,
     useMaterial3: true,
     scaffoldBackgroundColor: AppColors.backgroundDark,
-    
+
     // Color Scheme
     colorScheme: const ColorScheme.dark(
       primary: AppColors.accentPrimary,
@@ -18,7 +19,7 @@ class AppTheme {
       onSurface: AppColors.textPrimary,
       surfaceContainerHighest: AppColors.backgroundElevated,
     ),
-    
+
     // AppBar Theme
     appBarTheme: const AppBarTheme(
       backgroundColor: Colors.transparent,
@@ -32,21 +33,18 @@ class AppTheme {
       ),
       iconTheme: IconThemeData(color: AppColors.textPrimary),
     ),
-    
+
     // Card Theme
     cardTheme: CardTheme(
       color: AppColors.backgroundCard,
       elevation: 0,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(20),
-        side: const BorderSide(
-          color: AppColors.glassBorder,
-          width: 1,
-        ),
+        side: const BorderSide(color: AppColors.glassBorder, width: 1),
       ),
       clipBehavior: Clip.antiAlias,
     ),
-    
+
     // Elevated Button Theme
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ElevatedButton.styleFrom(
@@ -54,9 +52,7 @@ class AppTheme {
         backgroundColor: AppColors.accentPrimary,
         elevation: 0,
         padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 16),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(16),
-        ),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
         textStyle: const TextStyle(
           fontSize: 16,
           fontWeight: FontWeight.w600,
@@ -64,16 +60,14 @@ class AppTheme {
         ),
       ),
     ),
-    
+
     // Outlined Button Theme
     outlinedButtonTheme: OutlinedButtonThemeData(
       style: OutlinedButton.styleFrom(
         foregroundColor: AppColors.accentPrimary,
         side: const BorderSide(color: AppColors.accentPrimary, width: 2),
         padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 16),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(16),
-        ),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
         textStyle: const TextStyle(
           fontSize: 16,
           fontWeight: FontWeight.w600,
@@ -81,22 +75,17 @@ class AppTheme {
         ),
       ),
     ),
-    
+
     // Text Button Theme
     textButtonTheme: TextButtonThemeData(
       style: TextButton.styleFrom(
         foregroundColor: AppColors.accentPrimary,
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(12),
-        ),
-        textStyle: const TextStyle(
-          fontSize: 14,
-          fontWeight: FontWeight.w600,
-        ),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+        textStyle: const TextStyle(fontSize: 14, fontWeight: FontWeight.w600),
       ),
     ),
-    
+
     // Input Decoration Theme
     inputDecorationTheme: InputDecorationTheme(
       filled: true,
@@ -122,22 +111,13 @@ class AppTheme {
         borderRadius: BorderRadius.circular(16),
         borderSide: const BorderSide(color: AppColors.error, width: 2),
       ),
-      labelStyle: const TextStyle(
-        color: AppColors.textSecondary,
-        fontSize: 14,
-      ),
-      hintStyle: const TextStyle(
-        color: AppColors.textMuted,
-        fontSize: 14,
-      ),
+      labelStyle: const TextStyle(color: AppColors.textSecondary, fontSize: 14),
+      hintStyle: const TextStyle(color: AppColors.textMuted, fontSize: 14),
     ),
-    
+
     // Icon Theme
-    iconTheme: const IconThemeData(
-      color: AppColors.textPrimary,
-      size: 24,
-    ),
-    
+    iconTheme: const IconThemeData(color: AppColors.textPrimary, size: 24),
+
     // Text Theme
     textTheme: const TextTheme(
       displayLarge: TextStyle(

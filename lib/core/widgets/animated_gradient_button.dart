@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import '../theme/app_colors.dart';
 
 class AnimatedGradientButton extends StatefulWidget {
@@ -40,18 +41,12 @@ class _AnimatedGradientButtonState extends State<AnimatedGradientButton>
     _scaleAnimation = Tween<double>(
       begin: 1.0,
       end: 0.95,
-    ).animate(CurvedAnimation(
-      parent: _controller,
-      curve: Curves.easeInOut,
-    ));
+    ).animate(CurvedAnimation(parent: _controller, curve: Curves.easeInOut));
 
     _shimmerAnimation = Tween<double>(
       begin: 0.0,
       end: 1.0,
-    ).animate(CurvedAnimation(
-      parent: _controller,
-      curve: Curves.linear,
-    ));
+    ).animate(CurvedAnimation(parent: _controller, curve: Curves.linear));
   }
 
   @override

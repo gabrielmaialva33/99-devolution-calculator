@@ -28,9 +28,7 @@ class DevolutionCalculatorApp extends StatelessWidget {
           foregroundColor: Colors.white,
           elevation: 2,
         ),
-        cardTheme: const CardThemeData(
-          elevation: 4,
-        ),
+        cardTheme: const CardThemeData(elevation: 4),
         elevatedButtonTheme: ElevatedButtonThemeData(
           style: ElevatedButton.styleFrom(
             shape: RoundedRectangleBorder(

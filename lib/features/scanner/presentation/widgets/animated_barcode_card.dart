@@ -1,5 +1,7 @@
-import 'package:flutter/material.dart';
 import 'dart:math' as math;
+
+import 'package:flutter/material.dart';
+
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/widgets/glass_container.dart';
 import '../../domain/models/barcode_item.dart';
@@ -38,26 +40,19 @@ class _AnimatedBarcodeCardState extends State<AnimatedBarcodeCard>
     _slideAnimation = Tween<double>(
       begin: 50.0,
       end: 0.0,
-    ).animate(CurvedAnimation(
-      parent: _controller,
-      curve: Curves.easeOutCubic,
-    ));
+    ).animate(CurvedAnimation(parent: _controller, curve: Curves.easeOutCubic));
 
-    _fadeAnimation = Tween<double>(
-      begin: 0.0,
-      end: 1.0,
-    ).animate(CurvedAnimation(
-      parent: _controller,
-      curve: const Interval(0.3, 1.0, curve: Curves.easeIn),
-    ));
+    _fadeAnimation = Tween<double>(begin: 0.0, end: 1.0).animate(
+      CurvedAnimation(
+        parent: _controller,
+        curve: const Interval(0.3, 1.0, curve: Curves.easeIn),
+      ),
+    );
 
     _scaleAnimation = Tween<double>(
       begin: 0.8,
       end: 1.0,
-    ).animate(CurvedAnimation(
-      parent: _controller,
-      curve: Curves.elasticOut,
-    ));
+    ).animate(CurvedAnimation(parent: _controller, curve: Curves.elasticOut));
 
     _controller.forward();
   }
@@ -120,18 +115,12 @@ class _AnimatedBarcodeCardState extends State<AnimatedBarcodeCard>
                               children: [
                                 Text(
                                   'Código: ',
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .bodySmall
-                                      ?.copyWith(
-                                        color: AppColors.textMuted,
-                                      ),
+                                  style: Theme.of(context).textTheme.bodySmall
+                                      ?.copyWith(color: AppColors.textMuted),
                                 ),
                                 Text(
                                   widget.item.displayCode,
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .titleMedium
+                                  style: Theme.of(context).textTheme.titleMedium
                                       ?.copyWith(
                                         fontFamily: 'monospace',
                                         color: AppColors.accentPrimary,
@@ -143,9 +132,8 @@ class _AnimatedBarcodeCardState extends State<AnimatedBarcodeCard>
                             const SizedBox(height: 4),
                             Text(
                               widget.item.scanMethodLabel,
-                              style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                                    color: AppColors.textSecondary,
-                                  ),
+                              style: Theme.of(context).textTheme.bodySmall
+                                  ?.copyWith(color: AppColors.textSecondary),
                             ),
                           ],
                         ),
@@ -207,10 +195,7 @@ class _AnimatedBarcodeCardState extends State<AnimatedBarcodeCard>
           ],
         ),
         borderRadius: BorderRadius.circular(12),
-        border: Border.all(
-          color: AppColors.success.withOpacity(0.3),
-          width: 1,
-        ),
+        border: Border.all(color: AppColors.success.withOpacity(0.3), width: 1),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.end,
@@ -218,15 +203,15 @@ class _AnimatedBarcodeCardState extends State<AnimatedBarcodeCard>
           Text(
             widget.item.formattedValue,
             style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                  color: AppColors.success,
-                  fontWeight: FontWeight.bold,
-                ),
+              color: AppColors.success,
+              fontWeight: FontWeight.bold,
+            ),
           ),
           Text(
             'Item #${widget.index + 1}',
-            style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                  color: AppColors.textMuted,
-                ),
+            style: Theme.of(
+              context,
+            ).textTheme.bodySmall?.copyWith(color: AppColors.textMuted),
           ),
         ],
       ),
