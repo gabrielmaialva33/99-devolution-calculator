@@ -10,10 +10,8 @@ class PermissionService {
   List<Permission> get _requiredPermissions => [
     Permission.camera,
     if (Platform.isAndroid) ...[
-      Permission.storage,
-      if (Platform.version.contains('API 33') || Platform.version.contains('API 34')) ...[
-        Permission.manageExternalStorage,
-      ],
+      // Usa manageExternalStorage para Android moderno
+      Permission.manageExternalStorage,
     ],
   ];
 

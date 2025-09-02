@@ -127,10 +127,10 @@ class _PermissionDialogState extends State<PermissionDialog> {
                 decoration: BoxDecoration(
                   color: _lastResult!.allGranted 
                     ? Colors.green.withValues(alpha: 0.1 * 255)
-                    : Colors.orange.withValues(alpha: 0.1 * 255),
+                    : Colors.amber.withValues(alpha: 0.15 * 255),
                   borderRadius: BorderRadius.circular(8),
                   border: Border.all(
-                    color: _lastResult!.allGranted ? Colors.green : Colors.orange,
+                    color: _lastResult!.allGranted ? Colors.green : Colors.amber.shade700,
                     width: 1,
                   ),
                 ),
@@ -138,7 +138,7 @@ class _PermissionDialogState extends State<PermissionDialog> {
                   children: [
                     Icon(
                       _lastResult!.allGranted ? Icons.check_circle : Icons.warning,
-                      color: _lastResult!.allGranted ? Colors.green : Colors.orange,
+                      color: _lastResult!.allGranted ? Colors.green : Colors.amber.shade800,
                       size: 20,
                     ),
                     const SizedBox(width: 8),
@@ -147,7 +147,8 @@ class _PermissionDialogState extends State<PermissionDialog> {
                         _lastResult!.summary,
                         style: TextStyle(
                           fontSize: 13,
-                          color: _lastResult!.allGranted ? Colors.green[700] : Colors.orange[700],
+                          fontWeight: FontWeight.w500,
+                          color: _lastResult!.allGranted ? Colors.green[700] : Colors.amber.shade900,
                         ),
                       ),
                     ),
