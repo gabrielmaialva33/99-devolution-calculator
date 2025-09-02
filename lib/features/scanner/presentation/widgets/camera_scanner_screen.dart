@@ -238,7 +238,7 @@ class _CameraScannerScreenState extends State<CameraScannerScreen>
                     color: Colors.black54,
                     shape: BoxShape.circle,
                     border: Border.all(
-                      color: AppColors.glassBorder,
+                      color: AppColors.border,
                       width: 2,
                     ),
                   ),
@@ -269,12 +269,12 @@ class _ScannerOverlayPainter extends CustomPainter {
       ..style = PaintingStyle.fill;
 
     final Paint borderPaint = Paint()
-      ..color = AppColors.accentPrimary
+      ..color = AppColors.primary
       ..style = PaintingStyle.stroke
       ..strokeWidth = 3.0;
 
     final Paint cornerPaint = Paint()
-      ..color = AppColors.accentPrimary
+      ..color = AppColors.primary
       ..style = PaintingStyle.stroke
       ..strokeWidth = 5.0
       ..strokeCap = StrokeCap.round;
@@ -283,9 +283,9 @@ class _ScannerOverlayPainter extends CustomPainter {
       ..shader = LinearGradient(
         colors: [
           Colors.transparent,
-          AppColors.accentPrimary.withOpacity(0.5),
-          AppColors.accentPrimary,
-          AppColors.accentPrimary.withOpacity(0.5),
+          AppColors.primary.withOpacity(0.5),
+          AppColors.primary,
+          AppColors.primary.withOpacity(0.5),
           Colors.transparent,
         ],
       ).createShader(Rect.fromLTWH(0, 0, size.width, 2));
