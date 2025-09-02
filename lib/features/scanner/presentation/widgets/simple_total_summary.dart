@@ -87,8 +87,9 @@ class SimpleTotalSummary extends StatelessWidget {
                 formatter.format(totalValue),
                 style: const TextStyle(
                   color: Colors.white,
-                  fontSize: 34,
-                  fontWeight: FontWeight.bold,
+                  fontSize: 42,
+                  fontWeight: FontWeight.w700,
+                  letterSpacing: -0.5,
                 ),
               ),
               
