@@ -149,36 +149,38 @@ class _SimpleScannerViewState extends State<SimpleScannerView> {
   }
 
   Widget _buildActionButtons(BuildContext context, ScannerViewModel viewModel) {
-    return Container(
-      padding: const EdgeInsets.all(16),
-      decoration: BoxDecoration(
-        color: AppColors.backgroundElevated,
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withValues(alpha: 0.05),
-            offset: const Offset(0, -2),
-            blurRadius: 8,
-          ),
-        ],
-      ),
-      child: Row(
-        children: [
-          Expanded(
-            child: ElevatedButton.icon(
-              onPressed: () => _openCameraScanner(context, viewModel),
-              icon: const Icon(Icons.camera_alt),
-              label: const Text('Câmera'),
+    return SafeArea(
+      child: Container(
+        padding: const EdgeInsets.fromLTRB(16, 16, 16, 16),
+        decoration: BoxDecoration(
+          color: AppColors.backgroundElevated,
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withValues(alpha: 0.05 * 255),
+              offset: const Offset(0, -2),
+              blurRadius: 8,
             ),
-          ),
-          const SizedBox(width: 12),
-          Expanded(
-            child: OutlinedButton.icon(
-              onPressed: () => _openManualInput(context, viewModel),
-              icon: const Icon(Icons.keyboard),
-              label: const Text('Manual'),
+          ],
+        ),
+        child: Row(
+          children: [
+            Expanded(
+              child: ElevatedButton.icon(
+                onPressed: () => _openCameraScanner(context, viewModel),
+                icon: const Icon(Icons.camera_alt),
+                label: const Text('Câmera'),
+              ),
             ),
-          ),
-        ],
+            const SizedBox(width: 12),
+            Expanded(
+              child: OutlinedButton.icon(
+                onPressed: () => _openManualInput(context, viewModel),
+                icon: const Icon(Icons.keyboard),
+                label: const Text('Manual'),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
