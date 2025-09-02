@@ -84,7 +84,7 @@ class PermissionService {
       case Permission.storage:
         return 'Armazenamento é necessário para exportar arquivos CSV';
       case Permission.manageExternalStorage:
-        return 'Acesso a arquivos é necessário para salvar relatórios CSV';
+        return 'Acesso completo a arquivos é necessário para salvar CSV';
       default:
         return 'Permissão necessária para o funcionamento do app';
     }
