@@ -115,7 +115,7 @@ class ScannerViewModel extends ChangeNotifier {
         scanMethod: method,
       );
 
-      _repository.addItem(item);
+      await _repository.addItem(item);
       await _playSuccessSound(method);
     } catch (e) {
       _lastError = e.toString();
@@ -142,12 +142,12 @@ class ScannerViewModel extends ChangeNotifier {
   }
 
   // Item Management
-  void removeItem(int index) {
-    _repository.removeItem(index);
+  Future<void> removeItem(int index) async {
+    await _repository.removeItem(index);
   }
 
-  void clearAll() {
-    _repository.clearAll();
+  Future<void> clearAll() async {
+    await _repository.clearAll();
     _lastError = null;
     notifyListeners();
   }
