@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
+import 'package:intl/date_symbol_data_local.dart';
 import 'package:provider/provider.dart';
 
 import 'core/theme/app_theme.dart';
@@ -9,10 +10,11 @@ import 'features/scanner/presentation/view_models/scanner_view_model.dart';
 import 'features/scanner/presentation/views/simple_scanner_view.dart';
 import 'services/audio_service.dart';
 
-void main() {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  // Set Brazilian locale
+  // Initialize Brazilian locale data
+  await initializeDateFormatting('pt_BR', null);
   Intl.defaultLocale = 'pt_BR';
 
   // Set system UI overlay style
