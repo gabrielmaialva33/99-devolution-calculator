@@ -45,13 +45,13 @@ class SimpleBarcodeCard extends StatelessWidget {
                     end: Alignment.bottomRight,
                     colors: [
                       _getMethodColor(),
-                      _getMethodColor().withValues(alpha: 0.8),
+                      _getMethodColor().withValues(alpha: 0.8 * 255),
                     ],
                   ),
                   borderRadius: BorderRadius.circular(10),
                   boxShadow: [
                     BoxShadow(
-                      color: _getMethodColor().withValues(alpha: 0.3),
+                      color: _getMethodColor().withValues(alpha: 0.3 * 255),
                       blurRadius: 4,
                       offset: const Offset(0, 2),
                     ),
