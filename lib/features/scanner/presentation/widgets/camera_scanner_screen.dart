@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
 import '../../../../core/theme/app_colors.dart';
-import '../../../../core/widgets/glass_container.dart';
 
 class CameraScannerScreen extends StatefulWidget {
   final Function(String) onScan;
@@ -139,30 +138,28 @@ class _CameraScannerScreenState extends State<CameraScannerScreen>
             ),
           ),
           const Spacer(),
-          GlassContainer(
+          Container(
             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+            decoration: BoxDecoration(
+              color: Colors.black54,
+              borderRadius: BorderRadius.circular(20),
+            ),
             child: Row(
+              mainAxisSize: MainAxisSize.min,
               children: [
                 Container(
                   width: 8,
                   height: 8,
-                  decoration: BoxDecoration(
+                  decoration: const BoxDecoration(
                     color: AppColors.success,
                     shape: BoxShape.circle,
-                    boxShadow: [
-                      BoxShadow(
-                        color: AppColors.success.withOpacity(0.5),
-                        blurRadius: 4,
-                        spreadRadius: 1,
-                      ),
-                    ],
                   ),
                 ),
                 const SizedBox(width: 8),
                 const Text(
                   'Escaneando',
                   style: TextStyle(
-                    color: AppColors.textPrimary,
+                    color: Colors.white,
                     fontSize: 14,
                     fontWeight: FontWeight.w600,
                   ),
@@ -180,13 +177,17 @@ class _CameraScannerScreenState extends State<CameraScannerScreen>
       padding: const EdgeInsets.all(24),
       child: Column(
         children: [
-          GlassContainer(
+          Container(
             padding: const EdgeInsets.all(16),
+            decoration: BoxDecoration(
+              color: Colors.black54,
+              borderRadius: BorderRadius.circular(8),
+            ),
             child: const Text(
               'Posicione o código de barras dentro da área de leitura',
               textAlign: TextAlign.center,
               style: TextStyle(
-                color: AppColors.textSecondary,
+                color: Colors.white,
                 fontSize: 14,
               ),
             ),
