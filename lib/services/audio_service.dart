@@ -1,15 +1,14 @@
 import 'package:audioplayers/audioplayers.dart';
 
 class AudioService {
-  static final AudioService _instance = AudioService._internal();
-
-  factory AudioService() => _instance;
-
-  AudioService._internal();
-
   final AudioPlayer _audioPlayer = AudioPlayer();
 
-  Future<void> playSuccessSound() async {
+  void initialize() {
+    // Initialize audio player if needed
+    _audioPlayer.setReleaseMode(ReleaseMode.stop);
+  }
+
+  Future<void> playSuccess() async {
     try {
       await _audioPlayer.play(AssetSource('sounds/success.mp3'));
     } catch (e) {
@@ -17,7 +16,7 @@ class AudioService {
     }
   }
 
-  Future<void> playErrorSound() async {
+  Future<void> playError() async {
     try {
       await _audioPlayer.play(AssetSource('sounds/error.mp3'));
     } catch (e) {
@@ -25,7 +24,7 @@ class AudioService {
     }
   }
 
-  Future<void> playUsbScanSound() async {
+  Future<void> playUsbScan() async {
     try {
       await _audioPlayer.play(AssetSource('sounds/usb_scan.mp3'));
     } catch (e) {
@@ -33,13 +32,19 @@ class AudioService {
     }
   }
 
-  Future<void> playCameraScanSound() async {
+  Future<void> playCameraScan() async {
     try {
       await _audioPlayer.play(AssetSource('sounds/camera_scan.mp3'));
     } catch (e) {
       // Error playing camera sound: $e
     }
   }
+  
+  // Legacy method names for compatibility
+  Future<void> playSuccessSound() => playSuccess();
+  Future<void> playErrorSound() => playError();
+  Future<void> playUsbScanSound() => playUsbScan();
+  Future<void> playCameraScanSound() => playCameraScan();
 
   void dispose() {
     _audioPlayer.dispose();

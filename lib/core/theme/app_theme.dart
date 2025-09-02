@@ -35,13 +35,9 @@ class AppTheme {
     ),
 
     // Card Theme
-    cardTheme: CardTheme(
+    cardTheme: const CardThemeData(
       color: AppColors.backgroundCard,
       elevation: 0,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(20),
-        side: const BorderSide(color: AppColors.glassBorder, width: 1),
-      ),
       clipBehavior: Clip.antiAlias,
     ),
 
