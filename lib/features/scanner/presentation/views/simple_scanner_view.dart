@@ -237,7 +237,9 @@ class _SimpleScannerViewState extends State<SimpleScannerView> {
                 child: viewModel.isExporting
                     ? Container(
                         decoration: BoxDecoration(
-                          color: AppColors.secondary.withValues(alpha: 0.1 * 255),
+                          color: AppColors.secondary.withValues(
+                            alpha: 0.1 * 255,
+                          ),
                           borderRadius: BorderRadius.circular(16),
                         ),
                         child: const Center(
@@ -271,7 +273,10 @@ class _SimpleScannerViewState extends State<SimpleScannerView> {
                             : null,
                         style: OutlinedButton.styleFrom(
                           foregroundColor: AppColors.secondary,
-                          side: BorderSide(color: AppColors.secondary, width: 2),
+                          side: BorderSide(
+                            color: AppColors.secondary,
+                            width: 2,
+                          ),
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(16),
                           ),
