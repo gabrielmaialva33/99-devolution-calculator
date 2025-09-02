@@ -53,6 +53,9 @@ dependencies:
   csv: ^6.0.0
   path_provider: ^2.1.4
   share_plus: ^7.2.2
+  
+  # Database persistence
+  sqflite: ^2.3.0
 
 dev_dependencies:
   flutter_test:
