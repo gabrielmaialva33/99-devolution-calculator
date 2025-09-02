@@ -8,7 +8,10 @@ import 'core/theme/app_theme.dart';
 import 'features/scanner/data/repositories/barcode_repository.dart';
 import 'features/scanner/presentation/view_models/scanner_view_model.dart';
 import 'features/scanner/presentation/views/simple_scanner_view.dart';
+import 'features/scanner/presentation/widgets/permission_dialog.dart';
 import 'services/audio_service.dart';
+import 'services/database_service.dart';
+import 'services/permission_service.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -16,6 +19,9 @@ void main() async {
   // Initialize Brazilian locale data
   await initializeDateFormatting('pt_BR', null);
   Intl.defaultLocale = 'pt_BR';
+
+  // Initialize database
+  await DatabaseService().database;
 
   // Set system UI overlay style
   SystemChrome.setSystemUIOverlayStyle(
