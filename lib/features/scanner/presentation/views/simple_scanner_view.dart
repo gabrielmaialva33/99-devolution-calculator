@@ -368,27 +368,27 @@ class _SimpleScannerViewState extends State<SimpleScannerView> {
   void _handleSaveCSV(BuildContext context, ScannerViewModel viewModel) async {
     final filePath = await viewModel.saveCSV();
     if (filePath != null && context.mounted) {
+      ScaffoldMessenger.of(context).clearSnackBars(); // Limpa snackbars anteriores
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: Column(
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.start,
+          content: Row(
             children: [
-              Text('✅ CSV salvo: ${filePath.split('/').last}'),
-              const SizedBox(height: 4),
-              const Text(
-                'Arquivo salvo no diretório de documentos do app',
-                style: TextStyle(fontSize: 12, color: Colors.white70),
+              const Icon(Icons.check_circle, color: Colors.white, size: 20),
+              const SizedBox(width: 12),
+              Expanded(
+                child: Text('CSV salvo: ${filePath.split('/').last}'),
               ),
             ],
           ),
           backgroundColor: AppColors.success,
-          duration: const Duration(seconds: 4),
+          duration: const Duration(seconds: 3),
+          behavior: SnackBarBehavior.floating,
+          margin: const EdgeInsets.all(16),
           action: SnackBarAction(
             label: 'OK',
             textColor: Colors.white,
             onPressed: () {
-              ScaffoldMessenger.of(context).hideCurrentSnackBar();
+              ScaffoldMessenger.of(context).clearSnackBars();
             },
           ),
         ),
