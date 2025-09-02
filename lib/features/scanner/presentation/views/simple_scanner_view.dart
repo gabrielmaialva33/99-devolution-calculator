@@ -109,17 +109,10 @@ class _SimpleScannerViewState extends State<SimpleScannerView> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Container(
-              padding: const EdgeInsets.all(24),
-              decoration: BoxDecoration(
-                color: AppColors.primary.withValues(alpha: 0.08 * 255),
-                shape: BoxShape.circle,
-              ),
-              child: Icon(
-                Icons.qr_code_scanner_rounded,
-                size: 64,
-                color: AppColors.primary,
-              ),
+            Icon(
+              Icons.qr_code_scanner_rounded,
+              size: 80,
+              color: Colors.grey[400],
             ),
             const SizedBox(height: 24),
             Text(
