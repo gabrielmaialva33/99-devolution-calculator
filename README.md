@@ -349,7 +349,7 @@ If you find this project helpful, please give it a star ⭐ to help others disco
 ## :busts_in_silhouette: Author
 
 <p align="center">
-  <img src=".github/assets/accounting.png" alt="Accounting" width="100">
+  <img src="https://avatars.githubusercontent.com/u/26732067" alt="Maia" width="100">
 </p>
 
 Made with ❤️ by **Maia** - Passionate about creating efficient business solutions!
@@ -365,5 +365,5 @@ Made with ❤️ by **Maia** - Passionate about creating efficient business solu
 </p>
 
 <p align="center">
-  &copy; 2025-present <a href="https://github.com/gabrielmaialva33/" target="_blank">Maia</a>
+  &copy; 2017-present <a href="https://github.com/gabrielmaialva33/" target="_blank">Maia</a>
 </p>
