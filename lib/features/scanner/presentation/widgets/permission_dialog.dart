@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:permission_handler/permission_handler.dart';
 
 import '../../../../core/theme/app_colors.dart';
 import '../../../../services/permission_service.dart';
@@ -31,7 +30,9 @@ class _PermissionDialogState extends State<PermissionDialog> {
     final allGranted = await _permissionService.areAllPermissionsGranted();
     if (allGranted) {
       widget.onPermissionsGranted();
-      Navigator.of(context).pop();
+      if (mounted) {
+        Navigator.of(context).pop();
+      }
     }
   }
 
@@ -50,7 +51,9 @@ class _PermissionDialogState extends State<PermissionDialog> {
 
       if (result.allGranted) {
         widget.onPermissionsGranted();
-        Navigator.of(context).pop();
+        if (mounted) {
+          Navigator.of(context).pop();
+        }
       }
     } catch (e) {
       setState(() {
@@ -60,13 +63,13 @@ class _PermissionDialogState extends State<PermissionDialog> {
   }
 
   Future<void> _openSettings() async {
-    await openAppSettings();
+    await _permissionService.openSettings();
   }
 
   @override
   Widget build(BuildContext context) {
-    return WillPopScope(
-      onWillPop: () async => false, // Impede fechar o diálogo
+    return PopScope(
+      canPop: false, // Impede fechar o diálogo
       child: AlertDialog(
         title: Row(
           children: [

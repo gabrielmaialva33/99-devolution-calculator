@@ -74,8 +74,8 @@ class PermissionService {
   }
 
   /// Abre as configurações do sistema para permissões negadas permanentemente
-  Future<void> openAppSettings() async {
-    await openAppSettings();
+  Future<bool> openSettings() async {
+    return await openAppSettings();
   }
 
   /// Retorna mensagem explicativa para cada permissão

@@ -8,10 +8,8 @@ import 'core/theme/app_theme.dart';
 import 'features/scanner/data/repositories/barcode_repository.dart';
 import 'features/scanner/presentation/view_models/scanner_view_model.dart';
 import 'features/scanner/presentation/views/splash_screen.dart';
-import 'features/scanner/presentation/widgets/permission_dialog.dart';
 import 'services/audio_service.dart';
 import 'services/database_service.dart';
-import 'services/permission_service.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

@@ -51,7 +51,7 @@ class _SimpleScannerViewState extends State<SimpleScannerView> {
                   child: SimpleTotalSummary(
                     totalValue: viewModel.totalValue,
                     itemCount: viewModel.itemCount,
-                    onClear: viewModel.clearAll,
+                    onClear: () => viewModel.clearAll(),
                   ),
                 ),
 
