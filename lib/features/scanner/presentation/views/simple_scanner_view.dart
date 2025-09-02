@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 import '../../../../core/theme/app_colors.dart';
+import '../../../../services/permission_service.dart';
 import '../../domain/models/barcode_item.dart';
 import '../view_models/scanner_view_model.dart';
 import '../widgets/camera_scanner_screen.dart';
@@ -303,18 +305,38 @@ class _SimpleScannerViewState extends State<SimpleScannerView> {
     );
   }
 
-  void _openCameraScanner(BuildContext context, ScannerViewModel viewModel) {
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (context) => CameraScannerScreen(
-          onScan: (code) {
-            viewModel.processBarcode(code, ScanMethod.camera);
-            Navigator.pop(context);
-          },
+  void _openCameraScanner(BuildContext context, ScannerViewModel viewModel) async {
+    // Solicita permissão da câmera apenas quando necessário
+    final permissionService = PermissionService();
+    final hasPermission = await permissionService.isPermissionGranted(Permission.camera);
+    
+    if (!hasPermission && context.mounted) {
+      final status = await permissionService.requestPermission(Permission.camera);
+      if (!status.isGranted) {
+        // Mostra mensagem de erro se permissão negada
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text('Permissão da câmera é necessária para escanear códigos'),
+            backgroundColor: AppColors.error,
+          ),
+        );
+        return;
+      }
+    }
+    
+    if (context.mounted) {
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => CameraScannerScreen(
+            onScan: (code) {
+              viewModel.processBarcode(code, ScanMethod.camera);
+              Navigator.pop(context);
+            },
+          ),
         ),
-      ),
-    );
+      );
+    }
   }
 
   void _openManualInput(BuildContext context, ScannerViewModel viewModel) {
@@ -348,8 +370,20 @@ class _SimpleScannerViewState extends State<SimpleScannerView> {
     if (filePath != null && context.mounted) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: Text('CSV salvo: ${filePath.split('/').last}'),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text('✅ CSV salvo: ${filePath.split('/').last}'),
+              const SizedBox(height: 4),
+              const Text(
+                'Arquivo salvo no diretório de documentos do app',
+                style: TextStyle(fontSize: 12, color: Colors.white70),
+              ),
+            ],
+          ),
           backgroundColor: AppColors.success,
+          duration: const Duration(seconds: 4),
           action: SnackBarAction(
             label: 'OK',
             textColor: Colors.white,

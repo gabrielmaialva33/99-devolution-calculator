@@ -4,7 +4,6 @@ import 'dart:io';
 import 'package:csv/csv.dart';
 import 'package:intl/intl.dart';
 import 'package:path_provider/path_provider.dart';
-import 'package:permission_handler/permission_handler.dart';
 import 'package:share_plus/share_plus.dart';
 
 import '../features/scanner/domain/models/barcode_item.dart';
@@ -90,16 +89,16 @@ class CSVExportService {
         eol: '\n',
       ).convert(csvData);
 
-      // Salva arquivo temporário
+      // Cria arquivo temporário para compartilhamento
       final tempDir = await getTemporaryDirectory();
       final fileName = _generateFileName();
       final file = File('${tempDir.path}/$fileName');
       await file.writeAsString(csvString, encoding: utf8);
 
-      // Compartilha o arquivo
+      // Compartilha via Share API nativo do Android/iOS
       await Share.shareXFiles(
         [XFile(file.path)],
-        text: 'Relatório de Devoluções - ${items.length} itens',
+        text: 'Relatório de Devoluções - ${items.length} itens\nTotal: ${NumberFormat.currency(locale: 'pt_BR', symbol: 'R\$').format(items.fold(0.0, (sum, item) => sum + item.value))}',
         subject: 'Relatório de Devoluções CSV',
       );
     } catch (e) {
@@ -107,45 +106,20 @@ class CSVExportService {
     }
   }
 
-  /// Verifica e solicita permissões de armazenamento
-  static Future<bool> _requestStoragePermission() async {
-    if (Platform.isAndroid) {
-      // Para Android 13+ (API 33+), não precisamos de permissões especiais para Downloads
-      if (await Permission.storage.isGranted) {
-        return true;
-      }
-
-      // Solicita permissão
-      final status = await Permission.storage.request();
-      if (status.isGranted) {
-        return true;
-      }
-
-      // Se negado permanentemente, mostra informações
-      if (status.isPermanentlyDenied) {
-        throw Exception(
-          'Permissão de armazenamento negada. Ative nas configurações do app.',
-        );
-      }
-
-      throw Exception(
-        'Permissão de armazenamento necessária para salvar arquivo',
-      );
-    }
-
-    return true; // iOS não precisa de permissões especiais
+  /// Obtém diretório para salvar arquivos (usando scoped storage)
+  static Future<Directory> _getSaveDirectory() async {
+    // Usa getApplicationDocumentsDirectory() que não precisa de permissões
+    // O arquivo ficará acessível via gerenciador de arquivos do Android
+    return await getApplicationDocumentsDirectory();
   }
 
-  /// Salva CSV na pasta Downloads do dispositivo
+  /// Salva CSV no diretório de documentos do app (sem precisar de permissões)
   static Future<String> saveCSVToDownloads(List<BarcodeItem> items) async {
     if (items.isEmpty) {
       throw Exception('Não há itens para exportar');
     }
 
     try {
-      // Verifica permissões
-      await _requestStoragePermission();
-
       final csvData = _generateCSVData(items);
       final csvString = const ListToCsvConverter(
         fieldDelimiter: ',',
@@ -153,26 +127,11 @@ class CSVExportService {
         eol: '\n',
       ).convert(csvData);
 
-      // Obtém diretório de downloads
-      Directory? downloadsDir;
-      if (Platform.isAndroid) {
-        // Tenta o diretório público Downloads primeiro
-        downloadsDir = Directory('/storage/emulated/0/Download');
-        if (!await downloadsDir.exists()) {
-          // Fallback para diretório da aplicação
-          downloadsDir = await getExternalStorageDirectory();
-        }
-      } else {
-        downloadsDir = await getApplicationDocumentsDirectory();
-      }
-
-      if (downloadsDir == null) {
-        throw Exception('Não foi possível acessar o diretório de downloads');
-      }
-
-      // Salva o arquivo
+      // Usa scoped storage - não precisa de permissões especiais
+      final saveDir = await _getSaveDirectory();
       final fileName = _generateFileName();
-      final file = File('${downloadsDir.path}/$fileName');
+      final file = File('${saveDir.path}/$fileName');
+      
       await file.writeAsString(csvString, encoding: utf8);
 
       return file.path;

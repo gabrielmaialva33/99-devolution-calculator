@@ -45,11 +45,7 @@ class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderSt
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
     super.didChangeAppLifecycleState(state);
-    
-    // Quando app volta do foreground (após conceder permissões), re-verifica
-    if (state == AppLifecycleState.resumed && !_hasInitialized) {
-      _checkPermissionsAndNavigate();
-    }
+    // Removido - não precisamos mais verificar permissões aqui
   }
 
   Future<void> _initializeApp() async {
@@ -57,23 +53,8 @@ class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderSt
     await Future.delayed(const Duration(milliseconds: 2000));
     
     if (mounted) {
-      await _checkPermissionsAndNavigate();
-    }
-  }
-
-  Future<void> _checkPermissionsAndNavigate() async {
-    if (_hasInitialized) return;
-    
-    try {
-      final hasPermissions = await _permissionService.areAllPermissionsGranted();
-      
-      if (hasPermissions) {
-        _navigateToMainScreen();
-      } else {
-        _showPermissionDialog();
-      }
-    } catch (e) {
-      // Em caso de erro, navega para tela principal (graceful degradation)
+      // Navega diretamente para a tela principal
+      // Permissões serão solicitadas quando necessário
       _navigateToMainScreen();
     }
   }
