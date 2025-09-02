@@ -12,10 +12,13 @@ class AppTheme {
     // Color Scheme
     colorScheme: const ColorScheme.light(
       primary: AppColors.primary,
-      secondary: AppColors.accent,
+      secondary: AppColors.secondary,
+      tertiary: AppColors.accent,
       error: AppColors.error,
       surface: AppColors.backgroundCard,
       onSurface: AppColors.textPrimary,
+      primaryContainer: AppColors.primaryLight,
+      secondaryContainer: AppColors.secondaryLight,
     ),
 
     // AppBar Theme
