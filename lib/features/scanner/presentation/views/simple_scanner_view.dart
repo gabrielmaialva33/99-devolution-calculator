@@ -8,6 +8,7 @@ import '../widgets/simple_barcode_card.dart';
 import '../widgets/simple_total_summary.dart';
 import '../widgets/manual_input_dialog.dart';
 import '../widgets/camera_scanner_screen.dart';
+import '../widgets/export_options_dialog.dart';
 
 class SimpleScannerView extends StatefulWidget {
   const SimpleScannerView({super.key});
@@ -50,6 +51,8 @@ class _SimpleScannerViewState extends State<SimpleScannerView> {
                     totalValue: viewModel.totalValue,
                     itemCount: viewModel.itemCount,
                     onClear: viewModel.clearAll,
+                    onExport: viewModel.canExport ? () => _showExportDialog(context, viewModel) : null,
+                    isExporting: viewModel.isExporting,
                   ),
                 ),
                 
