@@ -96,7 +96,7 @@ class _CameraScannerScreenState extends State<CameraScannerScreen>
               color: Colors.black54,
               child: const Center(
                 child: CircularProgressIndicator(
-                  color: AppColors.accentPrimary,
+                  color: AppColors.primary,
                 ),
               ),
             ),
@@ -211,7 +211,7 @@ class _CameraScannerScreenState extends State<CameraScannerScreen>
                         border: Border.all(
                           color: state == TorchState.on
                               ? AppColors.warning
-                              : AppColors.glassBorder,
+                              : AppColors.border,
                           width: 2,
                         ),
                       ),
