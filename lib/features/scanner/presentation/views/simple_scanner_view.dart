@@ -255,6 +255,40 @@ class _SimpleScannerViewState extends State<SimpleScannerView> {
     );
   }
 
+  void _showExportDialog(BuildContext context, ScannerViewModel viewModel) {
+    showDialog(
+      context: context,
+      builder: (context) => ExportOptionsDialog(
+        previewText: viewModel.getExportPreview(),
+        onShare: () => _handleShareCSV(context, viewModel),
+        onSave: () => _handleSaveCSV(context, viewModel),
+      ),
+    );
+  }
+
+  void _handleShareCSV(BuildContext context, ScannerViewModel viewModel) {
+    viewModel.shareCSV();
+  }
+
+  void _handleSaveCSV(BuildContext context, ScannerViewModel viewModel) async {
+    final filePath = await viewModel.saveCSV();
+    if (filePath != null && context.mounted) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('CSV salvo: ${filePath.split('/').last}'),
+          backgroundColor: AppColors.success,
+          action: SnackBarAction(
+            label: 'OK',
+            textColor: Colors.white,
+            onPressed: () {
+              ScaffoldMessenger.of(context).hideCurrentSnackBar();
+            },
+          ),
+        ),
+      );
+    }
+  }
+
   void _showAboutDialog(BuildContext context) {
     showDialog(
       context: context,
