@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+
 import '../../../../core/theme/app_colors.dart';
 
 class SimpleTotalSummary extends StatelessWidget {
@@ -27,10 +28,7 @@ class SimpleTotalSummary extends StatelessWidget {
         gradient: LinearGradient(
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
-          colors: [
-            AppColors.primary,
-            AppColors.primaryDark,
-          ],
+          colors: [AppColors.primary, AppColors.primaryDark],
         ),
         borderRadius: BorderRadius.circular(12),
         boxShadow: [
@@ -56,7 +54,9 @@ class SimpleTotalSummary extends StatelessWidget {
                       Container(
                         padding: const EdgeInsets.all(6),
                         decoration: BoxDecoration(
-                          color: AppColors.secondary.withValues(alpha: 0.3 * 255),
+                          color: AppColors.secondary.withValues(
+                            alpha: 0.3 * 255,
+                          ),
                           borderRadius: BorderRadius.circular(8),
                         ),
                         child: const Icon(
@@ -81,7 +81,10 @@ class SimpleTotalSummary extends StatelessWidget {
                     if (onExport != null && !isExporting)
                       IconButton(
                         onPressed: onExport,
-                        icon: const Icon(Icons.download_rounded, color: Colors.white),
+                        icon: const Icon(
+                          Icons.download_rounded,
+                          color: Colors.white,
+                        ),
                         tooltip: 'Exportar CSV',
                       ),
                     if (isExporting)
@@ -91,7 +94,9 @@ class SimpleTotalSummary extends StatelessWidget {
                         margin: const EdgeInsets.symmetric(horizontal: 12),
                         child: const CircularProgressIndicator(
                           strokeWidth: 2,
-                          valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
+                          valueColor: AlwaysStoppedAnimation<Color>(
+                            Colors.white,
+                          ),
                         ),
                       ),
                     IconButton(
@@ -103,7 +108,7 @@ class SimpleTotalSummary extends StatelessWidget {
                 ],
               ),
               const SizedBox(height: 12),
-              
+
               Text(
                 formatter.format(totalValue),
                 style: const TextStyle(
@@ -113,11 +118,14 @@ class SimpleTotalSummary extends StatelessWidget {
                   letterSpacing: -0.5,
                 ),
               ),
-              
+
               const SizedBox(height: 12),
-              
+
               Container(
-                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 16,
+                  vertical: 8,
+                ),
                 decoration: BoxDecoration(
                   color: AppColors.secondary.withValues(alpha: 0.2 * 255),
                   borderRadius: BorderRadius.circular(20),
@@ -146,7 +154,7 @@ class SimpleTotalSummary extends StatelessWidget {
                   ],
                 ),
               ),
-              
+
               if (itemCount == 0) ...[
                 const SizedBox(height: 16),
                 Text(

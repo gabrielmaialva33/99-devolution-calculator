@@ -1,14 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
+
 import '../../../../core/theme/app_colors.dart';
 
 class CameraScannerScreen extends StatefulWidget {
   final Function(String) onScan;
 
-  const CameraScannerScreen({
-    super.key,
-    required this.onScan,
-  });
+  const CameraScannerScreen({super.key, required this.onScan});
 
   @override
   State<CameraScannerScreen> createState() => _CameraScannerScreenState();
@@ -28,19 +26,15 @@ class _CameraScannerScreenState extends State<CameraScannerScreen>
       facing: CameraFacing.back,
       torchEnabled: false,
     );
-    
+
     _animationController = AnimationController(
       duration: const Duration(seconds: 2),
       vsync: this,
     )..repeat(reverse: true);
-    
-    _scanLineAnimation = Tween<double>(
-      begin: 0.1,
-      end: 0.9,
-    ).animate(CurvedAnimation(
-      parent: _animationController,
-      curve: Curves.easeInOut,
-    ));
+
+    _scanLineAnimation = Tween<double>(begin: 0.1, end: 0.9).animate(
+      CurvedAnimation(parent: _animationController, curve: Curves.easeInOut),
+    );
   }
 
   @override
@@ -70,14 +64,11 @@ class _CameraScannerScreenState extends State<CameraScannerScreen>
       body: Stack(
         children: [
           // Camera View
-          MobileScanner(
-            controller: _controller,
-            onDetect: _onDetect,
-          ),
-          
+          MobileScanner(controller: _controller, onDetect: _onDetect),
+
           // Scanning Overlay
           _buildScanningOverlay(),
-          
+
           // Top Controls
           SafeArea(
             child: Column(
@@ -88,15 +79,13 @@ class _CameraScannerScreenState extends State<CameraScannerScreen>
               ],
             ),
           ),
-          
+
           // Processing Indicator
           if (_isProcessing)
             Container(
               color: Colors.black54,
               child: const Center(
-                child: CircularProgressIndicator(
-                  color: AppColors.primary,
-                ),
+                child: CircularProgressIndicator(color: AppColors.primary),
               ),
             ),
         ],
@@ -131,10 +120,7 @@ class _CameraScannerScreenState extends State<CameraScannerScreen>
                 color: Colors.black54,
                 borderRadius: BorderRadius.circular(12),
               ),
-              child: const Icon(
-                Icons.arrow_back,
-                color: Colors.white,
-              ),
+              child: const Icon(Icons.arrow_back, color: Colors.white),
             ),
           ),
           const Spacer(),
@@ -186,10 +172,7 @@ class _CameraScannerScreenState extends State<CameraScannerScreen>
             child: const Text(
               'Posicione o código de barras dentro da área de leitura',
               textAlign: TextAlign.center,
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 14,
-              ),
+              style: TextStyle(color: Colors.white, fontSize: 14),
             ),
           ),
           const SizedBox(height: 24),
@@ -238,10 +221,7 @@ class _CameraScannerScreenState extends State<CameraScannerScreen>
                   decoration: BoxDecoration(
                     color: Colors.black54,
                     shape: BoxShape.circle,
-                    border: Border.all(
-                      color: AppColors.border,
-                      width: 2,
-                    ),
+                    border: Border.all(color: AppColors.border, width: 2),
                   ),
                   child: const Icon(
                     Icons.cameraswitch,
@@ -349,16 +329,14 @@ class _ScannerOverlayPainter extends CustomPainter {
       final Path cornerPath = Path()
         ..moveTo(corner[0].dx, corner[0].dy)
         ..lineTo(corner[1].dx, corner[1].dy)
-        ..arcToPoint(
-          corner[2],
-          radius: const Radius.circular(20),
-        )
+        ..arcToPoint(corner[2], radius: const Radius.circular(20))
         ..lineTo(corner[3].dx, corner[3].dy);
       canvas.drawPath(cornerPath, cornerPaint);
     }
 
     // Draw scan line
-    final double scanLineY = scanRect.top + (scanRect.height * scanLinePosition);
+    final double scanLineY =
+        scanRect.top + (scanRect.height * scanLinePosition);
     canvas.drawLine(
       Offset(scanRect.left + 20, scanLineY),
       Offset(scanRect.right - 20, scanLineY),

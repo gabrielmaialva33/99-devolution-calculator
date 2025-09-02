@@ -1,15 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+
 import '../../../../core/theme/app_colors.dart';
 import '../../domain/services/barcode_validation_service.dart';
 
 class ManualInputDialog extends StatefulWidget {
   final Function(String) onSubmit;
 
-  const ManualInputDialog({
-    super.key,
-    required this.onSubmit,
-  });
+  const ManualInputDialog({super.key, required this.onSubmit});
 
   @override
   State<ManualInputDialog> createState() => _ManualInputDialogState();
@@ -92,19 +90,12 @@ class _ManualInputDialogState extends State<ManualInputDialog> {
               padding: const EdgeInsets.all(12),
               child: Row(
                 children: [
-                  Icon(
-                    Icons.info_outline,
-                    size: 16,
-                    color: AppColors.info,
-                  ),
+                  Icon(Icons.info_outline, size: 16, color: AppColors.info),
                   const SizedBox(width: 8),
                   Expanded(
                     child: Text(
                       'Digite o código completo (11 dígitos) ou apenas o valor (5 dígitos)',
-                      style: TextStyle(
-                        fontSize: 12,
-                        color: AppColors.info,
-                      ),
+                      style: TextStyle(fontSize: 12, color: AppColors.info),
                     ),
                   ),
                 ],
@@ -112,7 +103,7 @@ class _ManualInputDialogState extends State<ManualInputDialog> {
             ),
           ),
           const SizedBox(height: 16),
-          
+
           // Input Field
           TextField(
             controller: _controller,
@@ -147,7 +138,7 @@ class _ManualInputDialogState extends State<ManualInputDialog> {
             onChanged: _validateAndPreview,
             onSubmitted: (_) => _submit(),
           ),
-          
+
           // Value Preview
           if (_previewValue != null) ...[
             const SizedBox(height: 16),

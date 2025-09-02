@@ -7,6 +7,7 @@ repository.
 
 Flutter application for barcode scanning and return value calculation. Supports USB HID scanners,
 camera scanning, and manual input. Built with Flutter 3.35.2 and Dart 3.9.0, using Material Design
+
 3.
 
 ## Development Commands

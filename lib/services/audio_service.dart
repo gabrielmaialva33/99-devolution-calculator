@@ -39,11 +39,14 @@ class AudioService {
       // Error playing camera sound: $e
     }
   }
-  
+
   // Legacy method names for compatibility
   Future<void> playSuccessSound() => playSuccess();
+
   Future<void> playErrorSound() => playError();
+
   Future<void> playUsbScanSound() => playUsbScan();
+
   Future<void> playCameraScanSound() => playCameraScan();
 
   void dispose() {

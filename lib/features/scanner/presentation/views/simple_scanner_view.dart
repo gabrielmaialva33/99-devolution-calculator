@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
+
 import '../../../../core/theme/app_colors.dart';
 import '../../domain/models/barcode_item.dart';
 import '../view_models/scanner_view_model.dart';
-import '../widgets/simple_barcode_card.dart';
-import '../widgets/simple_total_summary.dart';
-import '../widgets/manual_input_dialog.dart';
 import '../widgets/camera_scanner_screen.dart';
 import '../widgets/export_options_dialog.dart';
+import '../widgets/manual_input_dialog.dart';
+import '../widgets/simple_barcode_card.dart';
+import '../widgets/simple_total_summary.dart';
 
 class SimpleScannerView extends StatefulWidget {
   const SimpleScannerView({super.key});
@@ -51,11 +52,13 @@ class _SimpleScannerViewState extends State<SimpleScannerView> {
                     totalValue: viewModel.totalValue,
                     itemCount: viewModel.itemCount,
                     onClear: viewModel.clearAll,
-                    onExport: viewModel.canExport ? () => _showExportDialog(context, viewModel) : null,
+                    onExport: viewModel.canExport
+                        ? () => _showExportDialog(context, viewModel)
+                        : null,
                     isExporting: viewModel.isExporting,
                   ),
                 ),
-                
+
                 // Error Message
                 if (viewModel.lastError != null)
                   Container(
@@ -82,7 +85,11 @@ class _SimpleScannerViewState extends State<SimpleScannerView> {
                               ),
                             ),
                             IconButton(
-                              icon: const Icon(Icons.close, size: 18, color: Colors.white),
+                              icon: const Icon(
+                                Icons.close,
+                                size: 18,
+                                color: Colors.white,
+                              ),
                               onPressed: viewModel.clearError,
                             ),
                           ],
@@ -90,12 +97,10 @@ class _SimpleScannerViewState extends State<SimpleScannerView> {
                       ),
                     ),
                   ),
-                
+
                 // Items List
-                Expanded(
-                  child: _buildItemsList(viewModel),
-                ),
-                
+                Expanded(child: _buildItemsList(viewModel)),
+
                 // Action Buttons
                 _buildActionButtons(context, viewModel),
               ],
@@ -121,17 +126,17 @@ class _SimpleScannerViewState extends State<SimpleScannerView> {
             Text(
               'Nenhum item escaneado',
               style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                    color: Colors.grey[700],
-                    fontWeight: FontWeight.w600,
-                  ),
+                color: Colors.grey[700],
+                fontWeight: FontWeight.w600,
+              ),
             ),
             const SizedBox(height: 12),
             Text(
               'Use o leitor USB, câmera ou entrada manual',
               style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                    color: Colors.grey[500],
-                    fontSize: 16,
-                  ),
+                color: Colors.grey[500],
+                fontSize: 16,
+              ),
               textAlign: TextAlign.center,
             ),
           ],
@@ -158,9 +163,7 @@ class _SimpleScannerViewState extends State<SimpleScannerView> {
     return SafeArea(
       child: Container(
         padding: const EdgeInsets.fromLTRB(16, 20, 16, 16),
-        decoration: BoxDecoration(
-          color: Colors.white,
-        ),
+        decoration: BoxDecoration(color: Colors.white),
         child: Row(
           children: [
             Expanded(
@@ -300,7 +303,9 @@ class _SimpleScannerViewState extends State<SimpleScannerView> {
           children: [
             Text('Devolution Calculator v1.0.0'),
             SizedBox(height: 12),
-            Text('Aplicativo para leitura de códigos de barras e cálculo de devoluções.'),
+            Text(
+              'Aplicativo para leitura de códigos de barras e cálculo de devoluções.',
+            ),
             SizedBox(height: 12),
             Text('Suporta leitores USB, câmera e entrada manual.'),
           ],

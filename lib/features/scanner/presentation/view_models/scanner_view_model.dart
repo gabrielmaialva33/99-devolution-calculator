@@ -160,7 +160,8 @@ class ScannerViewModel extends ChangeNotifier {
       await CSVExportService.shareCSV(_items);
       await _audioService.playSuccess();
     } catch (e) {
-      _lastError = 'Erro ao compartilhar: ${e.toString().replaceAll('Exception: ', '')}';
+      _lastError =
+          'Erro ao compartilhar: ${e.toString().replaceAll('Exception: ', '')}';
       await _audioService.playError();
     } finally {
       _isExporting = false;
@@ -180,7 +181,8 @@ class ScannerViewModel extends ChangeNotifier {
       await _audioService.playSuccess();
       return filePath;
     } catch (e) {
-      _lastError = 'Erro ao salvar: ${e.toString().replaceAll('Exception: ', '')}';
+      _lastError =
+          'Erro ao salvar: ${e.toString().replaceAll('Exception: ', '')}';
       await _audioService.playError();
       return null;
     } finally {

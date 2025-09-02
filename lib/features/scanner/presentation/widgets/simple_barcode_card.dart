@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import '../../../../core/theme/app_colors.dart';
 import '../../domain/models/barcode_item.dart';
 
@@ -26,10 +27,7 @@ class SimpleBarcodeCard extends StatelessWidget {
           alignment: Alignment.centerRight,
           padding: const EdgeInsets.only(right: 16),
           color: AppColors.error,
-          child: const Icon(
-            Icons.delete,
-            color: Colors.white,
-          ),
+          child: const Icon(Icons.delete, color: Colors.white),
         ),
         child: Padding(
           padding: const EdgeInsets.all(16),
@@ -57,14 +55,10 @@ class SimpleBarcodeCard extends StatelessWidget {
                     ),
                   ],
                 ),
-                child: Icon(
-                  _getScanIcon(),
-                  color: Colors.white,
-                  size: 20,
-                ),
+                child: Icon(_getScanIcon(), color: Colors.white, size: 20),
               ),
               const SizedBox(width: 16),
-              
+
               // Item info
               Expanded(
                 child: Column(
@@ -72,9 +66,9 @@ class SimpleBarcodeCard extends StatelessWidget {
                   children: [
                     Text(
                       'Código: ${item.displayCode}',
-                      style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                        fontFamily: 'monospace',
-                      ),
+                      style: Theme.of(
+                        context,
+                      ).textTheme.bodyMedium?.copyWith(fontFamily: 'monospace'),
                     ),
                     const SizedBox(height: 4),
                     Text(
@@ -84,10 +78,13 @@ class SimpleBarcodeCard extends StatelessWidget {
                   ],
                 ),
               ),
-              
+
               // Value
               Container(
-                padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 12,
+                  vertical: 6,
+                ),
                 decoration: BoxDecoration(
                   color: AppColors.success,
                   borderRadius: BorderRadius.circular(6),
@@ -122,11 +119,11 @@ class SimpleBarcodeCard extends StatelessWidget {
   Color _getMethodColor() {
     switch (item.scanMethod) {
       case ScanMethod.usb:
-        return AppColors.primary;        // Quantum Blue for USB
+        return AppColors.primary; // Quantum Blue for USB
       case ScanMethod.camera:
-        return AppColors.secondary;      // Digital Sage for Camera
+        return AppColors.secondary; // Digital Sage for Camera
       case ScanMethod.manual:
-        return AppColors.accent;         // Matrix Sage for Manual
+        return AppColors.accent; // Matrix Sage for Manual
     }
   }
 }
