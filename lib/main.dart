@@ -7,7 +7,7 @@ import 'package:provider/provider.dart';
 import 'core/theme/app_theme.dart';
 import 'features/scanner/data/repositories/barcode_repository.dart';
 import 'features/scanner/presentation/view_models/scanner_view_model.dart';
-import 'features/scanner/presentation/views/simple_scanner_view.dart';
+import 'features/scanner/presentation/views/splash_screen.dart';
 import 'features/scanner/presentation/widgets/permission_dialog.dart';
 import 'services/audio_service.dart';
 import 'services/database_service.dart';
@@ -60,7 +60,7 @@ class DevolutionCalculatorApp extends StatelessWidget {
         title: 'Devolution Calculator',
         debugShowCheckedModeBanner: false,
         theme: AppTheme.lightTheme,
-        home: const SimpleScannerView(),
+        home: const SplashScreen(),
       ),
     );
   }

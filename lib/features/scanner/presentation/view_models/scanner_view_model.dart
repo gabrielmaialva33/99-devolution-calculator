@@ -48,10 +48,19 @@ class ScannerViewModel extends ChangeNotifier {
 
   void _initialize() {
     _audioService.initialize();
+    _initializeRepository();
     _itemsSubscription = _repository.itemsStream.listen((items) {
       _items = items;
       notifyListeners();
     });
+  }
+
+  Future<void> _initializeRepository() async {
+    try {
+      await _repository.initialize();
+    } catch (e) {
+      print('Erro ao inicializar repositório: $e');
+    }
   }
 
   // USB Scanner Input Handler
