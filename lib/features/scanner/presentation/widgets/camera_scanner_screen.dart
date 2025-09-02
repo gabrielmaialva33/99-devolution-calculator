@@ -206,7 +206,7 @@ class _CameraScannerScreenState extends State<CameraScannerScreen>
                       padding: const EdgeInsets.all(12),
                       decoration: BoxDecoration(
                         color: state == TorchState.on
-                            ? AppColors.warning.withOpacity(0.2)
+                            ? AppColors.warning.withValues(alpha: 0.2)
                             : Colors.black54,
                         shape: BoxShape.circle,
                         border: Border.all(
@@ -284,9 +284,9 @@ class _ScannerOverlayPainter extends CustomPainter {
       ..shader = LinearGradient(
         colors: [
           Colors.transparent,
-          AppColors.primary.withOpacity(0.5),
+          AppColors.primary.withValues(alpha: 0.5),
           AppColors.primary,
-          AppColors.primary.withOpacity(0.5),
+          AppColors.primary.withValues(alpha: 0.5),
           Colors.transparent,
         ],
       ).createShader(Rect.fromLTWH(0, 0, size.width, 2));

@@ -87,7 +87,7 @@ class _ManualInputDialogState extends State<ManualInputDialog> {
         children: [
           // Instructions
           Card(
-            color: AppColors.info.withOpacity(0.1),
+            color: AppColors.info.withValues(alpha: 0.1),
             child: Padding(
               padding: const EdgeInsets.all(12),
               child: Row(
@@ -152,7 +152,7 @@ class _ManualInputDialogState extends State<ManualInputDialog> {
           if (_previewValue != null) ...[
             const SizedBox(height: 16),
             Card(
-              color: AppColors.success.withOpacity(0.1),
+              color: AppColors.success.withValues(alpha: 0.1),
               child: Padding(
                 padding: const EdgeInsets.all(12),
                 child: Row(
