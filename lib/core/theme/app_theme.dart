@@ -34,12 +34,17 @@ class AppTheme {
       iconTheme: IconThemeData(color: Colors.white),
     ),
 
-    // Card Theme
+    // Card Theme - Subtle personality with colored borders
     cardTheme: CardThemeData(
       color: AppColors.backgroundCard,
-      elevation: 2,
+      elevation: 1,
+      shadowColor: AppColors.primary.withOpacity(0.1),
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(8),
+        borderRadius: BorderRadius.circular(12),
+        side: BorderSide(
+          color: AppColors.border,
+          width: 0.5,
+        ),
       ),
       clipBehavior: Clip.antiAlias,
     ),
@@ -59,11 +64,11 @@ class AppTheme {
       ),
     ),
 
-    // Outlined Button Theme
+    // Outlined Button Theme - Secondary color for variety
     outlinedButtonTheme: OutlinedButtonThemeData(
       style: OutlinedButton.styleFrom(
-        foregroundColor: AppColors.primary,
-        side: const BorderSide(color: AppColors.primary, width: 1),
+        foregroundColor: AppColors.secondary,
+        side: const BorderSide(color: AppColors.secondary, width: 1.5),
         padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
         textStyle: const TextStyle(

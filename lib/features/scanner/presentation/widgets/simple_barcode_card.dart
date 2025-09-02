@@ -35,13 +35,27 @@ class SimpleBarcodeCard extends StatelessWidget {
           padding: const EdgeInsets.all(16),
           child: Row(
             children: [
-              // Scan method icon
+              // Scan method icon with personality
               Container(
-                width: 40,
-                height: 40,
+                width: 42,
+                height: 42,
                 decoration: BoxDecoration(
-                  color: AppColors.primary,
-                  borderRadius: BorderRadius.circular(8),
+                  gradient: LinearGradient(
+                    begin: Alignment.topLeft,
+                    end: Alignment.bottomRight,
+                    colors: [
+                      _getMethodColor(),
+                      _getMethodColor().withOpacity(0.8),
+                    ],
+                  ),
+                  borderRadius: BorderRadius.circular(10),
+                  boxShadow: [
+                    BoxShadow(
+                      color: _getMethodColor().withOpacity(0.3),
+                      blurRadius: 4,
+                      offset: const Offset(0, 2),
+                    ),
+                  ],
                 ),
                 child: Icon(
                   _getScanIcon(),
@@ -97,11 +111,22 @@ class SimpleBarcodeCard extends StatelessWidget {
   IconData _getScanIcon() {
     switch (item.scanMethod) {
       case ScanMethod.usb:
-        return Icons.usb;
+        return Icons.usb_rounded;
       case ScanMethod.camera:
-        return Icons.camera_alt;
+        return Icons.camera_alt_rounded;
       case ScanMethod.manual:
-        return Icons.keyboard;
+        return Icons.keyboard_rounded;
+    }
+  }
+
+  Color _getMethodColor() {
+    switch (item.scanMethod) {
+      case ScanMethod.usb:
+        return AppColors.primary;        // Quantum Blue for USB
+      case ScanMethod.camera:
+        return AppColors.secondary;      // Digital Sage for Camera
+      case ScanMethod.manual:
+        return AppColors.accent;         // Matrix Sage for Manual
     }
   }
 }
