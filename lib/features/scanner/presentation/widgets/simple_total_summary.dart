@@ -6,12 +6,16 @@ class SimpleTotalSummary extends StatelessWidget {
   final double totalValue;
   final int itemCount;
   final VoidCallback onClear;
+  final VoidCallback? onExport;
+  final bool isExporting;
 
   const SimpleTotalSummary({
     super.key,
     required this.totalValue,
     required this.itemCount,
     required this.onClear,
+    this.onExport,
+    this.isExporting = false,
   });
 
   @override

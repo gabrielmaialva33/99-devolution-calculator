@@ -148,6 +148,51 @@ class ScannerViewModel extends ChangeNotifier {
     notifyListeners();
   }
 
+  // CSV Export Methods
+  Future<void> shareCSV() async {
+    if (!canExport) return;
+
+    _isExporting = true;
+    _lastError = null;
+    notifyListeners();
+
+    try {
+      await CSVExportService.shareCSV(_items);
+      await _audioService.playSuccess();
+    } catch (e) {
+      _lastError = 'Erro ao compartilhar: ${e.toString().replaceAll('Exception: ', '')}';
+      await _audioService.playError();
+    } finally {
+      _isExporting = false;
+      notifyListeners();
+    }
+  }
+
+  Future<String?> saveCSV() async {
+    if (!canExport) return null;
+
+    _isExporting = true;
+    _lastError = null;
+    notifyListeners();
+
+    try {
+      final filePath = await CSVExportService.saveCSVToDownloads(_items);
+      await _audioService.playSuccess();
+      return filePath;
+    } catch (e) {
+      _lastError = 'Erro ao salvar: ${e.toString().replaceAll('Exception: ', '')}';
+      await _audioService.playError();
+      return null;
+    } finally {
+      _isExporting = false;
+      notifyListeners();
+    }
+  }
+
+  String getExportPreview() {
+    return CSVExportService.generatePreview(_items);
+  }
+
   @override
   void dispose() {
     _usbInputTimer?.cancel();
