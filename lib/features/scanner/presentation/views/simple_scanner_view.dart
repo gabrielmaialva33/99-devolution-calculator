@@ -118,7 +118,7 @@ class _SimpleScannerViewState extends State<SimpleScannerView> {
             Text(
               'Nenhum item escaneado',
               style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                    color: AppColors.textPrimary,
+                    color: Colors.grey[700],
                     fontWeight: FontWeight.w600,
                   ),
             ),
@@ -126,7 +126,7 @@ class _SimpleScannerViewState extends State<SimpleScannerView> {
             Text(
               'Use o leitor USB, câmera ou entrada manual',
               style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                    color: AppColors.textSecondary,
+                    color: Colors.grey[500],
                     fontSize: 16,
                   ),
               textAlign: TextAlign.center,
@@ -156,14 +156,7 @@ class _SimpleScannerViewState extends State<SimpleScannerView> {
       child: Container(
         padding: const EdgeInsets.fromLTRB(16, 20, 16, 16),
         decoration: BoxDecoration(
-          color: AppColors.backgroundCard,
-          boxShadow: [
-            BoxShadow(
-              color: Colors.black.withValues(alpha: 0.08 * 255),
-              offset: const Offset(0, -4),
-              blurRadius: 12,
-            ),
-          ],
+          color: Colors.white,
         ),
         child: Row(
           children: [
