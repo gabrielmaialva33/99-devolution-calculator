@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 import 'app_colors.dart';
+import '../utils/color_utils.dart';
 
 class AppTheme {
   static ThemeData lightTheme = ThemeData(
@@ -38,7 +39,7 @@ class AppTheme {
     cardTheme: CardThemeData(
       color: AppColors.backgroundCard,
       elevation: 1,
-      shadowColor: AppColors.primary.withOpacity(0.1),
+      shadowColor: AppColors.primary.withAlpha(0.1),
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(12),
         side: BorderSide(
