@@ -167,8 +167,8 @@
 1. **Clone the repository**
 
 ```bash
-git clone https://github.com/your-username/devolution_calculator.git
-cd devolution_calculator
+git clone https://github.com/your-username/99-devolution-calculator.git
+cd 99-devolution-calculator
 ```
 
 2. **Install dependencies**
